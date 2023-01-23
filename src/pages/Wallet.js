@@ -1,18 +1,11 @@
 import React from 'react';
+import Header from '../components/Header';
 
 class Wallet extends React.Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(getCurrencies());
-  }
-
   render() {
-    return <div>TrybeWallet</div>;
+    return (
+      <Header />
+    );
   }
 }
-
-Wallet.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
-
-export default connect()(Wallet);
+export default Wallet;

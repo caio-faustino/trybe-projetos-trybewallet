@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { infoUserSave } from '../redux/actions';
+import { saveUserInfo } from '../redux/actions';
 import validateDisabledButton from '../suport/check';
 
 class Login extends React.Component {
@@ -13,7 +13,7 @@ class Login extends React.Component {
 
   handleSubmit = () => {
     const { history, dispatch } = this.props;
-    dispatch(infoUserSave({ ...this.state }));
+    dispatch(saveUserInfo({ ...this.state }));
     history.push('/carteira');
   };
 
@@ -43,7 +43,7 @@ class Login extends React.Component {
               placeholder="Insira o e-mail"
               type="text"
               id="email"
-              name="e-mail"
+              name="email"
               value={ email }
               onChange={ this.handleChange }
             />

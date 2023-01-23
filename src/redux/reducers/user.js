@@ -1,5 +1,7 @@
 const INITIAL_STATE = {
-  email: '',
+  user: {
+    email: '',
+  },
 };
 
 const reducerUser = (state = INITIAL_STATE, action) => {
