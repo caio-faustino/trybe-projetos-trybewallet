@@ -43,7 +43,7 @@ class Login extends React.Component {
               placeholder="Insira o e-mail"
               type="text"
               id="email"
-              name="email"
+              name="e-mail"
               value={ email }
               onChange={ this.handleChange }
             />
