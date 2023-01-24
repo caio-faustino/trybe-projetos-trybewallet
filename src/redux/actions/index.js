@@ -1,15 +1,15 @@
 const USER_ACTION = 'USER_ACTION';
 
-export const saveUserInfo = (user) => ({
-  type: USER_ACTION,
+export const userInfoSave = (user) => ({
   payload: user,
+  type: USER_ACTION,
 });
 
-const WALLET_ACTION = 'WALLET_ACTION';
+// const WALLET_ACTION = 'WALLET_ACTION';
 
-export const saveWalletInfo = (wallet) => ({
-  type: WALLET_ACTION,
-  payload: wallet,
+export const walletInfoSave = (wallet, currencies) => ({
+  type: 'SAVE_INFO',
+  payload: { wallet, currencies },
 });
 
 export const beginCurrencyList = () => ({
@@ -17,7 +17,7 @@ export const beginCurrencyList = () => ({
 });
 
 export const listCurrencies = (currencies) => ({
-  type: 'LIST_SUCCESS', currencies: Object.keys(currencies),
+  type: 'LIST_SUCCESS', currencies,
 });
 
 export const listCurrenciesFailure = (error) => ({

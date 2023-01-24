@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { walletInfoSave } from '../redux/actions';
 
 class WalletForm extends Component {
   methods = ['Cartão de débito', 'Dinheiro', 'Cartão de crédito'];
@@ -8,7 +9,7 @@ class WalletForm extends Component {
   tags = ['Transporte', 'Lazer', 'Alimentação', 'Trabalho', 'Saúde'];
 
   state = {
-    valueInput: 0,
+    value: 0,
     method: this.methods[0],
     tag: this.tags[0],
     description: '',
@@ -22,9 +23,20 @@ class WalletForm extends Component {
     });
   };
 
+  handleSubmit = async () => {
+    const { dispatch } = this.props;
+    const requestCurrencies = await fetch('https://economia.awesomeapi.com.br/json/all');
+    const currenciesList = await requestCurrencies.json();
+    dispatch(walletInfoSave(this.state, currenciesList));
+    this.setState({
+      value: '',
+      description: '',
+    });
+  };
+
   render() {
     const { currencies } = this.props;
-    const { method, tag, valueInput, currency, description } = this.state;
+    const { method, tag, value, currency, description } = this.state;
     return (
       <form>
         <label htmlFor="description">
@@ -44,9 +56,9 @@ class WalletForm extends Component {
             data-testid="value-input"
             onChange={ this.handleChange }
             type="number"
-            name="valueInput"
+            name="value"
             id="value-input"
-            value={ valueInput }
+            value={ value }
           />
         </label>
         <label htmlFor="currency">
@@ -94,13 +106,15 @@ class WalletForm extends Component {
             ))}
           </select>
         </label>
+        <button type="button" onClick={ this.handleSubmit }>Adicionar despesa</button>
       </form>
     );
   }
 }
 
 WalletForm.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  currencies: PropTypes.arrayOf(Object).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

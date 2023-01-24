@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { saveUserInfo } from '../redux/actions';
+import { userInfoSave } from '../redux/actions';
 import validateDisabledButton from '../suport/check';
 
 class Login extends React.Component {
@@ -13,7 +13,7 @@ class Login extends React.Component {
 
   handleSubmit = () => {
     const { history, dispatch } = this.props;
-    dispatch(saveUserInfo({ ...this.state }));
+    dispatch(userInfoSave({ ...this.state }));
     history.push('/carteira');
   };
 
