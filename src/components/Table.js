@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteExpense } from '../redux/actions';
+import { deleteExpense, getInfoEdit } from '../redux/actions';
 
 class Table extends Component {
   tableHeaders = [
@@ -34,6 +34,11 @@ class Table extends Component {
     dispatch(deleteExpense(expense.id));
   };
 
+  expsSelectedEdit = (expense) => {
+    const { dispatch } = this.props;
+    dispatch(getInfoEdit(true, expense.id));
+  };
+
   valueConvertExc = (exchange, expense) => {
     const valueTranform = Number(expense.value);
     const excTransform = Number(exchange[expense.currency].ask);
@@ -61,11 +66,17 @@ class Table extends Component {
                   <td key={ hIndex }>{expense[header.key]}</td>
                 ) : (
                   <td key={ hIndex }>
-                    <button type="button" data-testid="edit-btn">Editar</button>
                     <button
+                      onClick={ () => this.expsSelectedEdit(expense) }
+                      data-testid="edit-btn"
                       type="button"
-                      data-testid="delete-btn"
+                    >
+                      Editar
+                    </button>
+                    <button
                       onClick={ () => this.deleteSelectedExpense(expense) }
+                      data-testid="delete-btn"
+                      type="button"
                     >
                       Excluir
                     </button>

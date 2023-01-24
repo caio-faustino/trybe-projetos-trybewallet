@@ -22,6 +22,19 @@ export const listCurrenciesFailure = (error) => ({
   type: 'LIST_FAILURE', error,
 });
 
+export const getInfoEdit = (edit, expenseId) => ({
+  type: 'SEND_EDIT',
+  edit,
+  expenseId,
+});
+
+export const editExpense = (expenseId, editedExpense, currencies) => ({
+  type: 'EDIT_INFO',
+  expenseId,
+  editedExpense,
+  currencies,
+});
+
 export const deleteExpense = (expenseId) => ({
   type: 'DELETE_INFO', expenseId,
 });

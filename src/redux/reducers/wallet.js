@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   idToEdit: 0,
 };
 
-function reducerWallet(state = INITIAL_STATE, action) {
+function walletReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
   case 'LIST_BEGIN':
     return {
@@ -27,6 +27,21 @@ function reducerWallet(state = INITIAL_STATE, action) {
       ...state,
       expenses: state.expenses.filter((expense) => expense.id !== action.expenseId),
     };
+  case 'SEND_EDIT':
+    return {
+      ...state,
+      editor: action.edit,
+      idToEdit: action.expenseId,
+    };
+  case 'EDIT_INFO':
+    return { ...state,
+      editor: false,
+      expenses: state.expenses.map(
+        (expense) => (expense.id === action.expenseId
+          ? { ...action.editedExpense, exchangeRates: action.currencies, id: expense.id }
+          : expense),
+      ),
+    };
   case 'SAVE_INFO':
     return {
       ...state,
@@ -44,4 +59,4 @@ function reducerWallet(state = INITIAL_STATE, action) {
   }
 }
 
-export default reducerWallet;
+export default walletReducer;
