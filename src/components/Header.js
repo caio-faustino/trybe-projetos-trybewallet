@@ -6,7 +6,7 @@ class Header extends Component {
   sumTotalExpenses = () => {
     const { expenses } = this.props;
     if (!expenses.length) {
-      return '0';
+      return '0.00';
     }
     const expensesSum = expenses.reduce(
       (total, expense) => total + expense
@@ -21,8 +21,8 @@ class Header extends Component {
     const { email } = this.props;
     return (
       <header>
-        <p data-testid="header-currency-field">BRL</p>
         <p data-testid="total-field">{this.sumTotalExpenses()}</p>
+        <p data-testid="header-currency-field">BRL</p>
         <p data-testid="email-field">{email}</p>
       </header>
     );

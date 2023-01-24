@@ -5,8 +5,6 @@ export const userInfoSave = (user) => ({
   type: USER_ACTION,
 });
 
-// const WALLET_ACTION = 'WALLET_ACTION';
-
 export const walletInfoSave = (wallet, currencies) => ({
   type: 'SAVE_INFO',
   payload: { wallet, currencies },
@@ -22,6 +20,10 @@ export const listCurrencies = (currencies) => ({
 
 export const listCurrenciesFailure = (error) => ({
   type: 'LIST_FAILURE', error,
+});
+
+export const deleteExpense = (expenseId) => ({
+  type: 'DELETE_INFO', expenseId,
 });
 
 export const getCurrencies = () => async (dispatch) => {

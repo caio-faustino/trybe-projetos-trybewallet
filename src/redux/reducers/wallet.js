@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   idToEdit: 0,
 };
 
-function walletReducer(state = INITIAL_STATE, action) {
+function reducerWallet(state = INITIAL_STATE, action) {
   switch (action.type) {
   case 'LIST_BEGIN':
     return {
@@ -21,6 +21,11 @@ function walletReducer(state = INITIAL_STATE, action) {
     return {
       ...state,
       error: action.error,
+    };
+  case 'DELETE_INFO':
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.expenseId),
     };
   case 'SAVE_INFO':
     return {
@@ -39,4 +44,4 @@ function walletReducer(state = INITIAL_STATE, action) {
   }
 }
 
-export default walletReducer;
+export default reducerWallet;
